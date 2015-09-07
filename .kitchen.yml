@@ -22,7 +22,7 @@ suites:
       network:
         - ["private_network", {ip: "10.1.2.3"}]
       synced_folders:
-        - [".", "/home/vagrant/listenbrainz"]
+        - ["..", "/home/vagrant/messybrainz"]
       customize:
         memory: <%= ENV['VBOX_MEMORY'] || '1500' %>
         cpus: 2
@@ -34,6 +34,9 @@ suites:
       - recipe[ourkafka]
       - recipe[ourcassandra]
       - recipe[ourpostgres]
+      - recipe[messybrainz::dev]
     attributes: {
-        "foo": 123
+        "messybrainz": {
+          "home_dir": "/home/vagrant/messybrainz/messybrainz-server"
+        }
     }
