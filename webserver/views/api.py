@@ -21,6 +21,12 @@ MAX_ITEMS_PER_GET = 100
 DEFAULT_ITEMS_PER_GET = 25
 MAX_ITEMS_PER_MESSYBRAINZ_LOOKUP = 10
 
+from debug import listen
+@api_bp.before_request
+def before_request():
+    print "Attach debugger"
+    listen() 
+
 @api_bp.route("/1/submit-listens", methods=["POST", "OPTIONS"])
 @crossdomain(headers="Authorization, Content-Type")
 def submit_listen():
