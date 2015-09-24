@@ -24,7 +24,7 @@ MAX_ITEMS_PER_MESSYBRAINZ_LOOKUP = 10
 
 @api_bp.before_request
 def before_request():
-    current_app.logger.info("%s - %s" % (os.getpid(), request.url))
+     print "%s - %s" % (os.getpid(), request.url)
 
 
 @api_bp.route("/1/submit-listens", methods=["POST", "OPTIONS"])
