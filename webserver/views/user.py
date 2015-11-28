@@ -25,6 +25,20 @@ def lastfmscraper(user_id):
     )
     return Response(scraper, content_type="text/javascript")
 
+@user_bp.route("/<user_id>/scraper-rdio.js")
+@crossdomain()
+def rdioscraper(user_id):
+    user_token = request.args.get("user_token")
+    rdio_username = request.args.get("rdio_username")
+    if user_token is None or rdio_username is None:
+        raise NotFound
+    scraper = render_template(
+        "user/scraper-rdio.js",
+        base_url=url_for("api_v1.submit_listen", user_id=user_id, _external=True),
+        user_token=user_token,
+        rdio_username=rdio_username,
+    )
+    return Response(scraper, content_type="text/javascript")
 
 @user_bp.route("/<user_id>")
 def profile(user_id):
@@ -99,7 +113,21 @@ def import_lastfm():
 @user_bp.route("/import-rdio")
 @login_required
 def import_rdio():
-    return render_template("user/import-rdio.html", user=current_user, loader=loader)
+    rdio_username = request.args.get("rdio_username")
+    if rdio_username:
+        loader = render_template(
+            "user/loader-rdio.js",
+            base_url=url_for("user.rdioscraper",
+                             user_id=current_user.musicbrainz_id,
+                             _external=True),
+            user_token=current_user.auth_token,
+            rdio_username=rdio_username,
+        )
+        loader = "javascript:%s" % loader
+    else:
+        loader = None
+    return render_template("user/import-rdio.html", user=current_user, loader=loader,
+                           rdio_username=rdio_username)
 
 def _get_user(user_id):
     if current_user.is_authenticated() and \

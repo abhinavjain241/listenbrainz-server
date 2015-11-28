@@ -6,7 +6,7 @@
   <h2 class="page-title">{{ user.musicbrainz_id }}</h2>
   {% if current_user.is_authenticated() and current_user == user %}
 
-     <h3>Import from Last.fm</h3>
+     <h3>Import from Rdio</h3>
      {% if loader %}
         <p>
           <strong>Step 2</strong>
@@ -16,53 +16,42 @@
              Drag this bookmarklet to your bookmarks toolbar:
           </p>
           <p>
-             <span class="btn btn-warning btn-lg" style="width: 400px"><a href="{{loader}}" style="color: white;">Import Last.fm to ListenBrainz</a></span>
+             <span class="btn btn-warning btn-lg" style="width: 400px"><a href="{{loader}}" style="color: white;">Import Rdio to ListenBrainz</a></span>
           </p>
         </div>
-        <p>
-          <span style="color:red">IMPORTANT</span>: If you've saved this bookmarklet before 29 Sept, please delete the old
-          bookmarklet and save it again, since we've moved to https.
-        </p>
         <p>
           <strong>Step 3</strong>
         </p>
         <div class="well">
           <p>
-             Go to your Last.fm library page and click the bookmarklet you just added to your toolbar.
+             Go to your Rdio history page and click the bookmarklet you just added to your toolbar.
           </p>
           <p>
              This will start the import of your listens. Please leave the page open and don't navigate away
              from it until the import process is complete. After that, you're done. Thanks!
           </p>
           <p>
-             <span class="btn btn-warning btn-lg" style="width: 400px"><a href="http://last.fm/user/{{lastfm_username}}/library"
-             style="color: white;">Go to my Last.fm library</a></span>
+             <span class="btn btn-warning btn-lg" style="width: 400px"><a href="http://www.rdio.com/people/{{ rdio_username }}/history/"
+             style="color: white;">Go to my Rdio history</a></span>
           <p>
         </div>
      {% else %}
      <p>
-        <strong>Notes about the Last.fm import process:</strong>
+        <strong>Notes about the Rdio import process:</strong>
      </p>
      <p>
-        The Last.fm importer manually steps through your listen history and imports the listens
+        The Rdio importer manually steps through your listen history and imports the listens
         one page at a time. Should it fail for whatever reason, it is safe to restart the import
         process. Running the import process multiple times <strong>does not</strong> create duplicates in your
         ListenBrainz listen history.
      </p>
      <p>
-        <strong>Important note for developers</strong>: The timestamps for listens shown on the Last.fm site have
-        a reduced accuracy (1 minute resolution) as opposed to the timestamps that are returned by the Last.fm API
-        (1 second resolution).
-        For the time being, please do not use any tools other than the import tool below for importing your
-        listen history. If you do import data from the Last.fm API you will generate duplicate listens in your listen
-        history. [<a href="http://tickets.musicbrainz.org/browse/LB-52">more details</a>].
-     <p>
         <strong>Step 1</strong>
      </p>
-     We need to know your Last.fm username:
+     We need to know your Rdio username:
      <div class="well">
          <form action="" method="GET">
-             <input type="text" name="lastfm_username" size="30" placeholder="Last.fm username">
+             <input type="text" name="rdio_username" size="30" placeholder="Rdio username">
              <input type="submit" value="proceed to step 2">
          </form>
      </div>
