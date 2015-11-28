@@ -77,9 +77,9 @@ def profile(user_id):
     )
 
 
-@user_bp.route("/import")
+@user_bp.route("/import-lastfm")
 @login_required
-def import_data():
+def import_lastfm():
     lastfm_username = request.args.get("lastfm_username")
     if lastfm_username:
         loader = render_template(
@@ -93,9 +93,13 @@ def import_data():
         loader = "javascript:%s" % loader
     else:
         loader = None
-    return render_template("user/import.html", user=current_user, loader=loader,
+    return render_template("user/import-lastfm.html", user=current_user, loader=loader,
                            lastfm_username=lastfm_username)
 
+@user_bp.route("/import-rdio")
+@login_required
+def import_rdio():
+    return render_template("user/import-rdio.html", user=current_user, loader=loader)
 
 def _get_user(user_id):
     if current_user.is_authenticated() and \

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Import - ListenBrainz{% endblock %}
+
+{% block content %}
+     <div class="row">
+        <h3>Import your listen history</h3>
+
+        <div class="col-md-12">
+            <p>
+                You can import your listen history from Last.fm and from Rdio:
+            </p>
+        </div>
+     </div>
+
+     <div class="row">
+         <div class="col-md-6">
+
+             <div>
+                 <span class="btn btn-warning btn-lg" style="width: 400px"><a href="{{ url_for("index.import_lastfm") }}"
+                 style="color: white;">Import from Last.fm</a></span>
+             </div>
+
+         </div>
+         <div class="col-md-6">
+
+             <div>
+                 <span class="btn btn-warning btn-lg" style="width: 400px"><a href="{{ url_for("index.import_rdio") }}"
+                 style="color: white;">Import from Rdio</a></span>
+             </div>
+
+         </div>
+     </div>
+
+{% endblock %}

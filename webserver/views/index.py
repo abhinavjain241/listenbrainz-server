@@ -13,14 +13,23 @@ locale.setlocale(locale.LC_ALL, '')
 def index():
     return render_template("index/index.html")
 
-
 @index_bp.route("/import")
 def import_data():
+    return render_template("index/import.html")
+
+@index_bp.route("/import-lastfm")
+def import_lastfm():
     if current_user.is_authenticated():
-        return redirect(url_for("user.import_data"))
+        return redirect(url_for("user.import_lastfm"))
     else:
         return current_app.login_manager.unauthorized()
 
+@index_bp.route("/import-rdio")
+def import_rdio():
+    if current_user.is_authenticated():
+        return redirect(url_for("user.import_rdio"))
+    else:
+        return current_app.login_manager.unauthorized()
 
 @index_bp.route("/download")
 def downloads():
